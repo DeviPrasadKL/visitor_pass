@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html data-theme="acid" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <!-- Page Header -->
+    <header>
+        <img src="https://noveloffice.in/wp-content/uploads/2023/08/novel-office-logo.webp" height="auto"
+            alt="Novel Logo" title="Novel Office" style="max-width: 230px;">
+    </header>
+
+
+    <!-- First Section -->
+    <div class="flex items-center justify-center flex-col pt-2" id="first-section">
+        <div class="p-4 font-semibold text-xl flex justify-center">
+            <h3><span class="text-purple-800">Visitor</span>  pass</h3>
+        </div>
+
+        <!-- Filter data -->
+        <div class="flex-wrap flex items-center justify-center gap-10 mb-6">
+            <!-- Location -->
+            <div class="flex flex-column justify-center w-44">
+                <label for="location_filter" class="font-weight-bold">Location : </label>
+                <select id="location_filter">
+                    <option value="">Select </option>
+                </select>
+            </div>
+            <!-- Room Type -->
+            <div class="flex flex-column justify-center w-44">
+                <label for="room_type_filter" class="font-weight-bold">Room Type : </label>
+                <select id="room_type_filter">
+                    <option value="">Select </option>
+                </select>
+            </div>
+
+            <!-- Room -->
+            <div class="flex flex-column justify-center w-44">
+                <label for="room_filter" class="font-weight-bold">Room : </label>
+                <select id="room_filter">
+                    <option value="">Select </option>
+                </select>
+            </div>
+            <!-- Booking Date -->
+            <div class="flex flex-column justify-center w-44">
+                <label for="booking_date_filter" class="font-weight-bold">From Date : </label>
+                <input type="date" id="booking_date_filter" value="">
+            </div>
+
+            <!--To Date-->
+            <div class="flex flex-column justify-center w-44">
+                <label for="toDate" class="font-weight-bold">To Date : </label>
+                <input type="date" id="toDate" value="">
+            </div>
+        </div>
+
+        <div class="container flex items-center justify-center px-2">
+            <div class="overflow-x-auto w-full">
+                <table class="table table-zebra">
+                    <!-- head -->
+                    <thead>
+                        <tr class="hover">
+                            <th>SL.No</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Room type</th>
+                            <th class="text-purple-800">Room Name</th>
+                            <!--<th>Client type</th>-->
+                            <th class="text-green-800">Start time</th>
+                            <th class="text-red-800">End time</th>
+                            <th class="font-bold">Price (in ₹)</th>
+                            <th class="font-bold">Money Wave Off</th>
+                            <th class="font-bold">Complementary Wave Off</th>
+                            <th class="font-bold">Accounts Verification</th>
+                            <!--<th class="font-bold">Card Status</th>-->
+                            <!--<th class="font-bold">Money collected</th>-->
+                        </tr>
+                    </thead>
+                    <tbody class="tableBody">
+
+                        <!--This content is appending from java script-->
+
+                    </tbody>
+                </table>
+
+                <div class="noRecordsDiv flex justify-center items-center">
+                    <!-- No records Div -->
+                    <!--This content is appending from java script-->
+                </div>
+
+                <div class="pagination-controls-pending mb-10">
+                    <button class="prev-page-pending">Previous</button>
+                    <span class="page-number-pending">
+                        <span id="current-page-pending">1</span>
+                        &nbsp;of&nbsp;
+                        <span id="total-pages-pending">1</span>
+                    </span>
+                    <button class="next-page-pending">Next</button>
+                </div>
+            </div>
+
+
+            <!-- You can open the  modal using ID.showModal() method -->
+            <dialog id="my_modal_3" class="modal">
+                <div class="modal-box" style="min-width: 50%;">
+                    <!--<form method="dialog">-->
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 closeBtn">✕</button>
+                    <!--</form>-->
+                    <div class="modalContent flex items-center justify-center gap-2 flex-col">
+                        <div class="singleContent">
+                            <div class="flex flex-col justify-center items-center w-full h-full">
+                                <div class="">
+                                    <div class="p-5 ">
+                                        <div class=" grid grid-cols-2 mb-4">
+                                            <div>
+                                                <h2 class="pass-id text-xl font-bold undeline">Sample layout</h2>
+                                            </div>
+                                            <div class="card text-white status flex items-center justify-center p-2">
+                                                <p>
+                                                    Accepted
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Bookings Details -->
+                                        <div>
+                                            <div class="grid grid-cols-2 gap-4 break-words">
+                                                <div>
+                                                    <h5 class="text-xs">Customer</h5>
+                                                    <h2 class="text-2sm font-bold" id="fullname-field">-------</h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs">Email</h5>
+                                                    <h2 class="text-2sm font-bold" id="email-field">-------</h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs">Location</h5>
+                                                    <h2 class="text-2sm font-bold" id="location-field">-------</h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs">Room Type</h5>
+                                                    <h2 class="text-2sm font-bold" id="room_type_show">-------</h2>
+                                                </div>
+
+                                                <!-- Div to show money collected and card status -->
+                                                <div class="readOnlyDiv1 readOnlyDiv">
+                                                    <h5 class="text-xs">Money Collected</h5>
+                                                    <h2 class="text-2sm font-bold" id="money_collected_show">-------
+                                                    </h2>
+                                                </div>
+
+                                                <div class="readOnlyDiv2 readOnlyDiv">
+                                                    <h5 class="text-xs">Card Status</h5>
+                                                    <h2 class="text-2sm font-bold" id="card_status_show">-------
+                                                    </h2>
+                                                </div>
+
+                                                <div>
+                                                    <h5 class="text-xs">Client Type</h5>
+                                                    <h2 class="text-2sm font-bold" id="clientType">-------
+                                                    </h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs">Date</h5>
+                                                    <h2 class="text-2sm font-bold" id="myDate">-------</h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs text-green-800">Start Time</h5>
+                                                    <h2 class="text-2sm font-bold text-green-800" id="startTime">-------
+                                                    </h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs text-red-800">End Time</h5>
+                                                    <h2 class="text-2sm font-bold text-red-800" id="endTime">-------
+                                                    </h2>
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-xs">Price (in ₹)</h5>
+                                                    <h2 class="text-2sm font-bold text-blue-700" id="price">-------</h2>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2 mb-2">
+                                                <h5 class="text-xs text-purple-800">Room Name</h5>
+                                                <h2 class="text-2sm font-bold text-purple-800" id="date-field">-------
+                                                </h2>
+                                            </div>
+
+                                            <!-- Div to show and edit money collected and card status -->
+                                            <div id="editDiv">
+                                                <hr class="new-divider">
+                                                <div class="flex justify-around items-center mt-2">
+                                                    <!-- Money Collected -->
+                                                    <div id="money_collected_div">
+                                                        <label for="money_collected" class="text-xs">Money
+                                                            Collected</label>
+                                                        <select id="money_collected" name="money_collected">
+                                                            <option value="No">No</option>
+                                                            <option value="Yes">Yes</option>
+                                                        </select>
+                                                    </div>
+                                            </div>
+
+                                            <div id="wave_off_section">                                                 
+                                            <table class="w-full">
+                                                <tr>
+                                                    <td class="p-2">
+                                                        <label for="money_wave_off_checkbox" class="text-md font-medium text-black">
+                                                            Money Wave Off
+                                                        </label>
+                                                    </td>
+                                                    <td class="p-2">
+                                                        <input 
+                                                            type="checkbox" 
+                                                            id="money_wave_off_checkbox" 
+                                                            name="money_wave_off" 
+                                                            class="form-checkbox h-4 w-4 text-blue-600 focus:ring focus:ring-blue-300"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="p-2">
+                                                        <label for="complementary_wave_off_checkbox" class="text-md font-medium text-black">
+                                                            Complementary Wave Off
+                                                        </label>
+                                                    </td>
+                                                    <td class="p-2">
+                                                        <input 
+                                                            type="checkbox" 
+                                                            id="complementary_wave_off_checkbox" 
+                                                            name="complementary_wave_off" 
+                                                            class="form-checkbox h-4 w-4 text-green-600 focus:ring focus:ring-green-300"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="p-2">
+                                                        <label for="accounts_verification_checkbox" class="text-md font-medium text-black">
+                                                            Accounts Verification
+                                                        </label>
+                                                    </td>
+                                                    <td class="p-2">
+                                                        <input 
+                                                            type="checkbox" 
+                                                            id="accounts_verification_checkbox" 
+                                                            name="accounts_verification" 
+                                                            class="form-checkbox h-4 w-4 text-green-600 focus:ring focus:ring-green-300"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div> 
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-10">
+                                                <button type="submit" class="btn btn-active submitRecordBtn">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="color-shade hidden">
+                                            <div style="display: flex; align-items: center; justify-content: center;">
+                                                <div
+                                                    style="background-color: #4caf50; height: 2rem; width: 2rem; border-radius: 50%;">
+                                                </div>
+                                                <p>&nbsp;-----> &nbsp;New slots</p>
+                                            </div>
+
+                                            <div style="display: flex; align-items: center; justify-content: center;">
+                                                <div
+                                                    style="background-color: #999999b8; height: 2rem; width: 2rem; border-radius: 50%;">
+                                                </div>
+                                                <p>&nbsp;-----> &nbsp;Other selected Slots</p>
+                                            </div>
+
+                                            <div style="display: flex; align-items: center; justify-content: center;">
+                                                <div
+                                                    style="background-color: #2f41ec; height: 2rem; width: 2rem; border-radius: 50%;">
+                                                </div>
+                                                <p>&nbsp;-----> &nbsp;This record selected slots</p>
+                                            </div>
+                                            <div style="display: flex; align-items: center; justify-content: center;">
+                                                <div
+                                                    style="background-color: #ec2f2f; height: 2rem; width: 2rem; border-radius: 50%;">
+                                                </div>
+                                                <p>&nbsp;-----> &nbsp;This slot has mutliple selection</p>
+                                            </div>
+                                        </div>
+                                        <div class="hidden" id="slotsContainer"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </dialog>
+        
+    
+
+    <!-- You can open the modal using ID.showModal() method -->
+    <dialog id="my_modal_3_external_client_booking" class="modal">
+        <div class="modal-box" style="min-width: 95%;">
+            <button
+                class="btn btn-lg btn-circle btn-ghost absolute right-2 top-7 bg-white text-red-800 border-1 border-red closeBtn_external_client_booking">Close</button>
+            <div class="modalContent flex items-center justify-center w-screen h-screen">
+                <iframe src="" frameborder="0" class="h-full w-full" id="iframe"></iframe>
+            </div>
+        </div>
+    </dialog>
+    <!-- External booking end -->
+
+    <!-- Dialog div -->
+    <dialog id="my_modal_1" class="modal">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Alert!</h3>
+            <p class="py-4">Kindly login and refresh this page.</p>
+            <div class="modal-action">
+                <a href="/login" target="_blank"><button class="btn">Login</button></a>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Page Footer -->
+    <footer>
+        <span style="font-size: 14px; margin: 0;">&copy; Copyright 2024 Novel Office.</span>
+    </footer>
+</body>
+
+</html>
